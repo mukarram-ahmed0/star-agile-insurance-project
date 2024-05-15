@@ -28,7 +28,20 @@ pipeline {
          echo 'Docker image is being created'
          sh 'docker build -t star306star306/insurance:01 .'
              }
-        }          
+        }
+     stage('Docker Hub login')  {
+      steps  {
+         echo 'Login to Docker hub to push the image'
+         withCredentials([usernamePassword(credentialsId: 'DockerLoginuser', passwordVariable: 'dockerpassword', usernameVariable: 'dockerlogin')]) {
+         sh 'docker login -u ${env.dockerlogin} -p $(env.dockerpassword)
+               }
+             }
+          }
+    stage('Push Image to Docker Hub')  {
+      steps  {
+         sh 'docker push star306star306/insurance:01'
+             }
+        }        
     }
 }
 
