@@ -9,7 +9,7 @@ pipeline {
     stage('Checkout') {
       steps {
         echo 'Checkout the source code from GitHub'
-        git branch: 'main', url: 'https://github.com/mukarram-ahmed0/star-agile-insurance-project.git'
+        git branch: 'master', url: 'https://github.com/mukarram-ahmed0/star-agile-insurance-project.git'
             }
     }
     stage('Package')  {
