@@ -18,6 +18,17 @@ pipeline {
         sh 'mvn clean package'
             }
         }
+    stage('Publish Test Reports')  {
+      steps {
+         publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '/var/lib/jenkins/workspace/Insurance-Project@2/target/surefire-reports', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
+            }
+        }
+    stage('Create Image from the package')  {
+      steps  {
+         echo 'Docker image is being created'
+         sh 'docker build -t star306star306/insurance:01 .'
+             }
+        }          
     }
 }
 
