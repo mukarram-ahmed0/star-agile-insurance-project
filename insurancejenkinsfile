@@ -39,11 +39,13 @@ pipeline {
           }
     stage('Push Image to Docker Hub')  {
       steps  {
+         echo 'Push Image to Docker Hub'
          sh 'docker push star306star306/insurance:01'
              }
         }
-    stage('Deploy using Ansible')  {
+    stage('Deploying using Ansible')  {
        steps  {
+        echo 'Deploy using Ansible'
         ansiblePlaybook credentialsId: 'ssh-user', disableHostKeyChecking: true, installation: 'ansible', inventory: '/etc/ansible/hosts', playbook: 'ansible-playbook.yml', vaultTmpPath: ''
               }
        }
